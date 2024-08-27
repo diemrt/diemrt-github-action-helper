@@ -27,7 +27,7 @@ if (process.argv.includes("--template-list") || process.argv.includes("-tl")) {
 }
 
 // Regex per estrarre i dati dall'input
-const regex = /https:\/\/(\w+)-(\w+)-(\d+)/g;
+const regex = /https:\/\/(\w+)-(\w+)-(\w+)/g;
 const match = regex.exec(inputString);
 
 // Se il formato della stringa di input non è valido, termina il programma
