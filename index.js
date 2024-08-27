@@ -8,7 +8,7 @@ const templateIndex = process.argv.indexOf("--template");
 const template = templateIndex !== -1 ? process.argv[templateIndex + 1] : undefined;
 
 // Template ammessi
-const allowedTemplates = ["yaml"]; // Aggiungi qui i template ammessi
+const allowedTemplates = ["yaml", "github_token"]; // Aggiungi qui i template ammessi
 
 // Comando per mostrare l'elenco dei comandi disponibili
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
@@ -44,6 +44,9 @@ if (allowedTemplates.includes(template)) {
     switch (template) {
         case "yaml":
             console.log(`azure-static-web-apps-${appName}-${branchName}-${prName}.yml`);
+            break;
+        case "github_token":
+            console.log(`AZURE_STATIC_WEB_APPS_API_TOKEN_${appName?.toString().toUpperCase()}_${branchName?.toString().toUpperCase()}_${prName?.toString().toUpperCase()}`);
             break;
         default:
             console.log("Template non valido");
