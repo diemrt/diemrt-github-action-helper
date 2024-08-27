@@ -8,7 +8,14 @@ const allowedTemplates = ["yaml"]; // Aggiungi qui i template ammessi
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
     console.log("Comandi disponibili:");
     console.log("--template: Specifica il template da utilizzare");
+    console.log("--template-list, -tl: Mostra l'elenco dei template ammessi");
     console.log("--help, -h: Mostra l'elenco dei comandi disponibili");
+    return;
+}
+
+if (process.argv.includes("--template-list") || process.argv.includes("-tl")) {
+    console.log("Template ammessi:");
+    console.log(allowedTemplates.join(", "));
     return;
 }
 
