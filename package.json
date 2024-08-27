@@ -1,5 +1,5 @@
 {
-  "name": "github-action-helper",
+  "name": "diemrt-github-action-helper",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
