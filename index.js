@@ -13,7 +13,7 @@ const allowedTemplates = ["yaml", "github_token"]; // Aggiungi qui i template am
 // Comando per mostrare l'elenco dei comandi disponibili
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
     console.log("Comandi disponibili:");
-    console.log("--template: Specifica il template da utilizzare");
+    console.log("--template <TEMPLATE_NAME>: Specifica il template da utilizzare");
     console.log("--template-list, -tl: Mostra l'elenco dei template ammessi");
     console.log("--help, -h: Mostra l'elenco dei comandi disponibili");
     return;
