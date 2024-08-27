@@ -1,10 +1,16 @@
+// Esempio di utilizzo: node index.js https://<app-name>-<branch-name>-<pr-number>.web.app --template yaml
+
+// Estrai la stringa di input dall'array process.argv
 const inputString = process.argv[2];
 
+// Se non è specificato un template, il valore sarà undefined
 const templateIndex = process.argv.indexOf("--template");
 const template = templateIndex !== -1 ? process.argv[templateIndex + 1] : undefined;
 
+// Template ammessi
 const allowedTemplates = ["yaml"]; // Aggiungi qui i template ammessi
 
+// Comando per mostrare l'elenco dei comandi disponibili
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
     console.log("Comandi disponibili:");
     console.log("--template: Specifica il template da utilizzare");
@@ -13,26 +19,31 @@ if (process.argv.includes("--help") || process.argv.includes("-h")) {
     return;
 }
 
+// Comando per mostrare l'elenco dei template ammessi
 if (process.argv.includes("--template-list") || process.argv.includes("-tl")) {
     console.log("Template ammessi:");
     console.log(allowedTemplates.join(", "));
     return;
 }
 
+// Regex per estrarre i dati dall'input
 const regex = /https:\/\/(\w+)-(\w+)-(\d+)/g;
 const match = regex.exec(inputString);
 
+// Se il formato della stringa di input non è valido, termina il programma
 if (!match) {
     console.log("Formato della stringa di input non valido");
     return;
 }
 
-const [, firstPart, secondPart, thirdPart] = match;
+// Estrai i dati dall'input
+const [, appName, branchName, prName] = match;
 
+// Se il template non è contenuto nell'array allowedTemplates, termina il programma
 if (allowedTemplates.includes(template)) {
     switch (template) {
         case "yaml":
-            console.log(`azure-static-web-apps-${firstPart}-${secondPart}-${thirdPart}.yml`);
+            console.log(`azure-static-web-apps-${appName}-${branchName}-${prName}.yml`);
             break;
         default:
             console.log("Template non valido");
