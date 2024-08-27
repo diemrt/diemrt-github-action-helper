@@ -1,21 +1,17 @@
 const inputString = process.argv[2];
 
-let template;
-// Verifica se è stato specificato il campo "--template" nella console app
-if (process.argv.includes("--template") || process.argv.includes("-t")) {
-    const templateIndex = process.argv.indexOf("--template");
-    template = process.argv[templateIndex + 1];
-}
+const templateIndex = process.argv.indexOf("--template");
+const template = templateIndex !== -1 ? process.argv[templateIndex + 1] : undefined;
 
-// Verifica se è stato specificato il comando "--help" nella console app
+const allowedTemplates = ["yaml"]; // Aggiungi qui i template ammessi
+
 if (process.argv.includes("--help") || process.argv.includes("-h")) {
     console.log("Comandi disponibili:");
-    console.log("--template, -t: Specifica il template da utilizzare");
+    console.log("--template: Specifica il template da utilizzare");
     console.log("--help, -h: Mostra l'elenco dei comandi disponibili");
     return;
 }
 
-// Verifica il formato della stringa di input
 const regex = /https:\/\/(\w+)-(\w+)-(\d+)/g;
 const match = regex.exec(inputString);
 
@@ -26,12 +22,15 @@ if (!match) {
 
 const [, firstPart, secondPart, thirdPart] = match;
 
-switch (template) {
-    case "yaml":
-        console.log(`azure-static-web-apps-${firstPart}-${secondPart}-${thirdPart}.yml`);
-        break;
-
-    default:
-        console.log("Template non valido");
-        break;
+if (allowedTemplates.includes(template)) {
+    switch (template) {
+        case "yaml":
+            console.log(`azure-static-web-apps-${firstPart}-${secondPart}-${thirdPart}.yml`);
+            break;
+        default:
+            console.log("Template non valido");
+            break;
+    }
+} else {
+    console.log("Template non valido");
 }
