@@ -22,7 +22,7 @@ if (process.argv.includes("--help") || process.argv.includes("-h")) {
 // Comando per mostrare l'elenco dei template ammessi
 if (process.argv.includes("--template-list") || process.argv.includes("-tl")) {
     console.log("Template ammessi:");
-    console.log(allowedTemplates.join(", "));
+    console.log(allowedTemplates.join("\n"));
     return;
 }
 
